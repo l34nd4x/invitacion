@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitación Especial con Fondo Hello Kitty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rosado: #f8c4d9;
+      --dorado: #d4af37;
+      --fondo-overlay: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      height: 100vh;
+      margin: 0;
+      background: url('hello_kitty.png') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+      position: relative;
+      transition: filter 0.3s ease;
+    }
+
+    #content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: filter 0.3s ease;
+    }
+
+    .card {
+      width: 260px;
+      height: 160px;
+      background: var(--rosado);
+      border: 3px solid var(--dorado);
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.4rem;
+      color: #fff;
+      user-select: none;
+      z-index: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--fondo-overlay);
+      backdrop-filter: blur(10px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .invitation {
+      background: #fff;
+      width: 600px;
+      max-width: 95vw;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Playfair Display', serif;
+      position: relative;
+    }
+
+    .invitation .header {
+      font-weight: 700;
+      font-size: 1.9rem;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    .invitation .recipient {
+      font-size: 1.4rem;
+      margin-bottom: 1.8rem;
+      text-align: center;
+    }
+
+    .invitation .message {
+      font-family: 'Great Vibes', cursive;
+      font-style: italic;
+      font-size: 1.4rem;
+      line-height: 1.7;
+      text-align: center;
+      color: #444;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      background: var(--dorado);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: #b88e1f;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">
+    <div class="card" id="card">Presióname</div>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="invitation">
+      <button class="close-btn" id="closeBtn">×</button>
+      <div class="header">Invitación</div>
+      <div class="recipient">Para: Mikaela Sedano</div>
+      <div class="message">
+        Eres la única que tiene una invitación especial. Te habría invitado antes, pero preferí hacer algo especial para la persona que me ayudó en mi momento más débil. Por eso te aprecio mucho. Espero que puedas venir.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const card = document.getElementById('card');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeBtn');
+    const content = document.getElementById('content');
+
+    card.addEventListener('click', () => {
+      overlay.classList.add('active');
+      content.style.filter = 'blur(6px)';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      content.style.filter = 'none';
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+        content.style.filter = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
